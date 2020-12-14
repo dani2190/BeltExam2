@@ -1,0 +1,12 @@
+@model LoginUser
+<form asp-action="Logged" method="post">
+                <label asp-for="LogEmail">Email</label>
+                <span asp-validation-for="LogEmail"></span>
+                <input class="form-control" asp-for="LogEmail">
+
+            <label asp-for="LogPassword">Password</label>
+            <span asp-validation-for="LogPassword"></span>
+            <input class="form-control" asp-for="LogPassword">
+
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </form>

@@ -1,0 +1,37 @@
+@model DojoActivity
+
+<div class="jumbotron">
+    <h1>Dojo Activity Center</h1>
+    @if(Model.Creator.UserId == ViewBag.User.UserId)
+    {
+        <a href="/cancel/@Model.DojoActivityId" role="button" class="btn btn-danger">Delete</a>
+    }
+else
+    {
+        @if(Model.ActivityList.All(t => t.UserId != ViewBag.User.UserId))
+        {
+            <a href="/join/@Model.DojoActivityId/@ViewBag.User.UserId" role="button" class="btn btn-success">Join</a>
+        }
+        @if (Model.ActivityList.Any(t=> t.UserId == ViewBag.User.UserId))
+        {
+            <a href="/leave/@Model.DojoActivityId/@ViewBag.User.UserId" role="button" class="btn btn-warning">Leave</a>
+        }
+
+    }
+
+<a href="/Home" role="button" class="btn btn-primary">Home</a>
+<a href="/Logout" role="button" class="btn btn-danger">Logout</a>
+</div>
+<hr>
+<h2>@Model.Title</h2>
+<h3>Event Coordinator: @Model.Creator.FirstName</h3>
+<h3>Description:</h3>
+<p>@Model.Description</p>
+
+<h3>Participants</h3>
+<ul>
+    @foreach(var p in Model.ActivityList)
+    {
+        <li>@p.NavUser.FirstName</li>
+    }
+</ul>

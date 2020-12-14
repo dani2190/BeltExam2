@@ -1,0 +1,50 @@
+@model List<DojoActivity>
+<div class="jumbotron">
+    <h1>Dojo Activity Center</h1>
+    
+    <h3>Hello! Welcome back, @ViewBag.User.FirstName</h3>
+    <a href="/Logout" role="button" class="btn btn-danger">Logout</a>
+</div>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>Activity</th>
+            <th>Date and Time</th>
+            <th>Duration</th>
+            <th>Event Coordinator</th>
+            <th>No. of Participants</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach( var a in Model)
+        {
+            <tr>
+                <td><a href="/single/@a.DojoActivityId">@a.Title</a></td>
+                <td>@a.ActivityDate</td>
+                <td>@a.Time @a.StringTime</td>
+                <td>@a.Creator.FirstName</td>
+                <td>@a.ActivityList.Count</td>
+                <td>
+                    @if( a.Creator.UserId == ViewBag.User.UserId)
+                    {
+                        <a href="/cancel/@a.DojoActivityId" role="button" class="btn btn-danger">Delete</a>
+                    }
+                    else
+                    {
+                        @if(a.ActivityList.All(t => t.UserId != ViewBag.User.UserId))
+                        {
+                            <a href="/join/@a.DojoActivityId/@ViewBag.User.UserId" role="button" class="btn btn-success">Join</a>
+                        }
+                        @if (a.ActivityList.Any(t=> t.UserId == ViewBag.User.UserId))
+                        {
+                            <a href="/leave/@a.DojoActivityId/@ViewBag.User.UserId" role="button" class="btn btn-warning">Leave</a>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+        
+    </tbody>
+</table>
+<a href="/NewActivity" class="btn btn-primary">Add Activity</a>

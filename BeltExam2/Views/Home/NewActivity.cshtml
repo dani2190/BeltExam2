@@ -1,0 +1,45 @@
+@model DojoActivity
+<div class="jumbotron">
+    <h1>Dojo Activity Center</h1>
+    <a href="/Home" role="button" class="btn btn-primary">Home</a>
+    <a href="/Logout" role="button" class="btn btn-danger">Logout</a>
+</div>
+    <form asp-action="NewActivity" method="post">
+        <div class="row">
+            <div class="col">
+                <label asp-for="Title" class="col-sm-2 col-form-label">Title</label>
+                <span asp-validation-for="Title"></span>
+                <input asp-for="Title" type="text" class="form-control">
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="ActivityDate" class="col-sm-2 col-form-label">Date/Time</label>
+                <span asp-validation-for="ActivityDate"></span>
+                <input asp-for="ActivityDate" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Time" class="col-sm-2 col-form-label">Duration</label>
+                <span asp-validation-for="Time"></span>
+                <input asp-for="Time" type="text" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label asp-for="StringTime" class="col-sm-2 col-form-label">Duration</label>
+                <span asp-validation-for="StringTime"></span>
+                <select asp-for="StringTime" class="custom-select">
+                    <option value="Hours">Hours</option>
+                    <option value="Minutes">Minutes</option>
+                    <option value="Days">Days</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label asp-for="Description" class="col-sm-2 col-form-label">Description</label>
+                <span asp-validation-for="Description"></span>
+                <input asp-for="Description" type="text" class="form-control">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success mt-3">Create Activity</button>
+    </form>
